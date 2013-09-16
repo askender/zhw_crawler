@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+    <div>
+        <p>add new crawler:</p>
+        <form name="input" action="add_crawler" method="post">
+
+            <div class="form-group">
+                <label for="NAME" class="col-lg-2 control-label">{{_('NAME')}}</label>
+                <span>
+                    <input type="text" name="NAME" class="form-control" id="NAME" required/>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="START_URL" class="col-lg-2 control-label">{{_('START_URL')}}</label>
+                <span>
+                    <input type="url" name="START_URL" class="form-control" id="START_URL" required/>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="XPATH" class="col-lg-2 control-label">{{_('XPATH')}} example:</label>
+                <div>
+                        title://div[@class='shop-name']/h1[@class='shop-title']/text()
+                        <br />
+                        score://div[@class='comment-rst']/span/meta/@content
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="XPATH" class="col-lg-2 control-label">{{_('XPATH')}}</label>
+                <div>
+                    <textarea type="text" name="XPATH" class="form-control" id="XPATH" rows="20" cols="200" required></textarea>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="MUST_LIST" class="col-lg-2 control-label">{{_('MUST_LIST')}} (split with blankspace)</label>
+                <span>
+                    <input type="text" name="MUST_LIST" class="form-control" id="MUST_LIST" required/>
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label for="ID_LIST" class="col-lg-2 control-label">{{_('ID_LIST')}} (split with Enter)</label>
+                <div>
+                    <textarea type="text" name="ID_LIST" class="form-control" id="ID_LIST" rows="20" cols="200" required></textarea>
+                </div>
+            </div>
+
+            <br />
+            <input type="submit" value="Submit" />
+        </form>
+
+    </div>
+
+    <br />
+    <br />
+    <br />
+
+</div>
+{% end %}

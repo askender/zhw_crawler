@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" class="{% block htmltype %}{% end %}">
+<head>
+  <meta charset="utf-8">
+  <title>ZHW Crawler Manager</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  {% block head %}{% end %}
+  <link rel="shortcut icon" href="{{ static_url("ico/favicon.ico") }}"></head>
+
+<body style="background:#ddd">
+
+  <h1>ZHW Crawler Manager</h1>
+
+  <nav>
+    <ul>
+      <li>
+        <a href="/add_crawler">add_crawler</a>
+      </li>
+      <li>
+        <a href="/view_crawler">view_crawler</a>
+      </li>
+    </ul>
+  </nav>
+  {% block body %}{% end %}
+
+{% block footer %}
+  <footer class="footer">
+    <div class="container">
+      <span class="pull-left copyleft">2013 zhw</span>
+      <span class="pull-right">
+        <a href="#/about">关于</a>
+        <a href="/static/slide/zhw_crawler.html">Slide</a>
+      </span>
+    </div>
+  </footer>
+  {% end %}
+  <h3>
+    You can alse view
+    <a href="http://localhost:6800/">Scrapyd</a>
+  </h3>
+
+  <script src="{{ static_url("js/jquery-2.0.3.min.js") }}"></script>
+  {% block bottom %}{% end %}
+</body>
+</html>

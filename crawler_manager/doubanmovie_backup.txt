@@ -1,0 +1,9 @@
+doubanmovie
+http://movie.douban.com/top250?start=
+list:/html[@class='ua-linux ua-webkit']/body/div[@id='wrapper']/div[@id='content']/div[@class='grid-16-8 clearfix']/div[@class='article']/ol[@class='grid_view']/li
+title:div[@class='item']/div[@class='info']/div[@class='hd']/a/span[@class='title'][1]
+score:div[@class='item']/div[@class='info']/div[@class='bd']/div[@class='star']/span
+title
+0
+25
+50

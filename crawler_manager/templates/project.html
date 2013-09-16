@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+    <h1>project_name:{{project}}</h1>
+
+    <h2>Jobs</h2>
+    {{s}}
+    <h2>available spiders</h2>
+    {% for i in spiders %}
+    <h3>{{i}}</h3>
+    <div>
+      {% if not i.endswith('_local') %}
+      所需爬取页面总数:{{job_num[i]}}
+      {% end %}
+    </div>
+    <form action="/project" method="post" id="{{i}}start">
+        <input type='hidden' name='spider' value='{{i}}'  />
+        <input type='hidden' name='project' value='{{project}}'  />
+        <input type='hidden' name='action' value='start'  />
+        <input type='submit' value='start'  />
+    </form>
+    <div>
+        <span id='{{i}}status'></span>&nbsp;&nbsp;
+        <span id='{{i}}404'></span>&nbsp;&nbsp;
+        <span id='{{i}}403'></span>&nbsp;&nbsp;
+        <span id='{{i}}502'></span>&nbsp;&nbsp;
+        <span id='{{i}}timeout'></span>&nbsp;&nbsp;
+        <span id='{{i}}200'></span>&nbsp;&nbsp;
+        <span id='{{i}}GET'></span>&nbsp;&nbsp;
+    </div>
+    {% end %}
+    <br />
+    <h3>
+        You can alse view
+        <a href="http://localhost:6080/enginestatus">enginestatus</a>
+        <a href="http://localhost:6868/api/global_stats">global_stats</a>
+    </h3>
+
+<br />
+
+</div>
+<div id='content'></div>
+{% end %}
+
+{% block bottom %}
+<script>
+loadChirp();
+
+function loadChirp(){
+{% for i in spiders %}
+  $.getJSON("http://localhost:6868/api/spider_stats/{{i}}", function(data{{i}}) {
+
+    if ( data{{i}}.hasOwnProperty('downloader/request_method_count/GET') ){
+
+      $("form#{{i}}start").hide();
+      $('#{{i}}status').html(' <a href="http://localhost:6868/api/spider_stats/{{i}}">status_when_running</a> ');
+      $('#{{i}}404').html('404: ' + data{{i}}['downloader/response_status_count/404']);
+      $('#{{i}}403').html('403: ' + data{{i}}['downloader/response_status_count/403']);
+      $('#{{i}}502').html('502: ' + data{{i}}['downloader/response_status_count/502']);
+      $('#{{i}}timeout').html('超时数: ' + data{{i}}['ddownloader/exception_count']);
+      $('#{{i}}200').html('200: ' + data{{i}}['downloader/response_status_count/200']);
+      $('#{{i}}GET').html('GET(请求数): ' + data{{i}}['downloader/request_method_count/GET']);
+      
+
+    };
+  }
+);
+{% end %}
+
+setTimeout("loadChirp()",5000);
+}
+</script>
+{% end %}

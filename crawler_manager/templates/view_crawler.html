@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="container">
+
+projects_status:{{projects_status}}
+<h3>available projects</h3>
+{% for i in projects %}
+<form action="/project" method="get">
+<span>{{i}}</span>
+<input type='hidden' name='project' value='{{i}}'  />     
+<input type='submit' value='view'  />     
+</form>
+{% end %}
+<br />
+
+</div>
+{% end %}

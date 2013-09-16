@@ -33,3 +33,12 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+
+#pid file
+*.pid
+
+#local file
+dbs
+logs
+*.log
+*.log.*
