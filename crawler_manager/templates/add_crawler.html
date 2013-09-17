@@ -24,9 +24,14 @@
             <div class="form-group">
                 <label for="XPATH" class="col-lg-2 control-label">{{_('XPATH')}} example:</label>
                 <div>
-                        title://div[@class='shop-name']/h1[@class='shop-title']/text()
-                        <br />
-                        score://div[@class='comment-rst']/span/meta/@content
+For 1 item in 1 page:<br />
+title://div[@class='shop-name']/h1[@class='shop-title']/text()
+<br />
+score://div[@class='comment-rst']/span/meta/@content<br />
+For many item in 1 page:(You should add 'list')<br />
+list:/html/body/div[@id='wrapper']/div[@id='content']/div[@class='grid-16-8 clearfix']/div[@class='article']/ol[@class='grid_view']/li<br />
+title:div[@class='item']/div[@class='info']/div[@class='hd']/a/span[@class='title'][1]<br />
+score:div[@class='item']/div[@class='info']/div[@class='bd']/div[@class='star']
                 </div>
             </div>
 
