@@ -42,3 +42,7 @@ dbs
 logs
 *.log
 *.log.*
+
+zhw_crawler/conf/proxy_list_raw
+items/
+zhw_crawler/log/

@@ -140,3 +140,4 @@ class AddCrawlerHandler(BaseHandler):
         os.rename(spider_file, spider_file_new)
         os.rename(spider_local_file, spider_local_file_new)
         os.rename(ids_list_file, ids_list_file_new)
+        self.write('done. Please go back')

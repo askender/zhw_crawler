@@ -25,17 +25,30 @@ class CommonSpider(BaseSpider):
                         shopid = eachline.replace('\n', '')
                         if shopid.isdigit():
                             skiplist.append(int(shopid))
-
-            if len(self.id_range) == 2:
-                for i in xrange(self.id_range[0], self.id_range[1]):
+            id_range = self.id_range
+            if len(id_range) == 2:
+                for i in xrange(id_range[0], id_range[1]):
+                    if i not in skiplist:
+                        url = '%s%s' % (self.start_url, i)
+                        self.start_urls.append(url)
+            if len(id_range) == 3:
+                for i in xrange(id_range[0], id_range[1], id_range[2]):
                     if i not in skiplist:
                         url = '%s%s' % (self.start_url, i)
                         self.start_urls.append(url)
             else:
-                for i in self.id_range:
+                for i in id_range:
                     if i not in skiplist:
                         url = '%s%s' % (self.start_url, i)
                         self.start_urls.append(url)
+
+        if 1:
+            file_list = [i for i in os.listdir(
+                self.result_path) if i.endswith('.html')]
+            exist_urls = [i.replace('.html', '') for i in file_list]
+            self.start_urls = [
+                i for i in self.start_urls
+                if i.split('/')[-1] not in exist_urls]
         BaseSpider.__init__(self, kwargs=kwargs)
 
     def parse(self, response):
