@@ -13,7 +13,7 @@ ITEM_PIPELINES = [
 ]
 
 # if use local site, DOWNLOAD_DELAY = 0 will make things wrong
-DOWNLOAD_DELAY = 0.1
+DOWNLOAD_DELAY = 5
 
 
 DOWNLOADER_MIDDLEWARES = {
@@ -38,7 +38,7 @@ Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.31 \
 '''
 
 # To make RotateUserAgentMiddleware enable.
-USE_PROXY = True  # True False
+USE_PROXY = False  # True False
 
 # Retry many times since proxies often fail
 RETRY_TIMES = 3

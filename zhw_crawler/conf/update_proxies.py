@@ -20,9 +20,9 @@ def update_proxies(flag=None):
         return
     open(proxy_list_flag, 'a').close()
     try:
-        r = requests.get(PROXY_URL, timeout=80)
-    except requests.exceptions.RequestException as e:
-        print(e)
+        r = requests.get(PROXY_URL, timeout=60)
+    except:
+        print('err')
     else:
         if r.status_code == requests.codes.ok:
             with open(proxy_list_raw, 'wb') as afile:
@@ -44,9 +44,9 @@ def check_proxy_list(flag):
             'http': 'http://%s' % i
         }
         try:
-            r = requests.get(TEST_URL, proxies=proxies, timeout=10)
-        except requests.exceptions.RequestException as e:
-            print(i, e)
+            r = requests.get(TEST_URL, proxies=proxies, timeout=5)
+        except:
+            print(i, 'err')
         else:
             if r.status_code == requests.codes.ok:
                 if 'http_xroxy_connection' in r.text:

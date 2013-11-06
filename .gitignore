@@ -46,3 +46,21 @@ logs
 zhw_crawler/conf/proxy_list_raw
 items/
 zhw_crawler/log/
+
+*.pyc
+
+# tmp files
+log/files/*.log
+log/files/*.log.*
+*.log
+*~
+*.swp
+
+# private files
+.idea
+temp
+html/*.html
+html/*.json
+
+.idea
+tmp
