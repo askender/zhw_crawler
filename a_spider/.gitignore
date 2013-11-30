@@ -1,0 +1,16 @@
+*.pyc
+
+# tmp files
+/log/files/*.log
+/log/files/*.log.*
+*.log
+*~
+*.swp
+
+# private files
+.idea
+temp
+
+html
+
+.idea
