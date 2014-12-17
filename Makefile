@@ -9,4 +9,3 @@ clean:
 	find . -name '*.pyc' -exec rm -f {} +
 	find . -name '*~' -exec rm -f {} +
 	find . -name '*.log' -exec rm -f {} +
-	find . -name '*.html' -exec rm -f {} +

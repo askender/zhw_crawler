@@ -7,6 +7,14 @@ from struct import unpack
 from urlparse import urlparse
 import requests
 from requests.exceptions import Timeout
+proxy_list = 'tools/proxy_list_xici'
+proxy_list = 'tools/proxy_list_goagent'
+proxy_list = 'tools/proxy_list_qujing'
+proxy_list = 'tools/proxy_list_ctrip'
+proxy_list = 'tools/proxy_list_newest'
+from pymongo import Connection
+conn = Connection()
+proxylog = conn.proxylog.proxylog
 
 
 class RequestsProxy():
@@ -116,7 +124,6 @@ req = RequestsProxy()
 
 def get_proxies():
     proxies = []
-    proxy_list = 'tools/proxy_list'
     if os.path.isfile(proxy_list):
         with open(proxy_list) as fp:
             for eachline in fp:
@@ -126,22 +133,43 @@ def get_proxies():
 
 def http_get(url):
     proxies = get_proxies()
-    proxies = {
-        'http': 'http://%s' % choice(proxies)
-    }
+    proxy = choice(proxies)
+    # proxies = {
+    #     'http': 'http://%s' % proxy
+    # }
+    if proxy.startswith('https'):
+        proxies = {
+            'https': proxy
+        }
+    else:
+        proxies = {
+            'http': proxy
+        }
     response = None
+    reason = None
+    t1 = time.time()
     try:
         # response = req.get(**kw)
         response = requests.get(url=url, proxies=proxies, timeout=5)
     except Timeout as e:
-        print 'timeout'
+        reason = 'timeout'
     except Exception as e:
-        print(e)
+        reason = unicode(e)
+    doc = {}
+    t = time.time() - t1
+    doc['t'] = t
+    doc['proxy'] = proxy
+    if reason:
+        doc['reason'] = reason
+    print doc
+    try:
+        proxylog.insert(doc)
+    except:
+        print 'log insert fail'
     return response
-    time.sleep(1)  # be gentle
+    # time.sleep(0.1)  # be gentle
 
 if __name__ == '__main__':
-
     r = http_get(url='http://baidu.com')
     print(r.content)
     # url = 'http://m.dianping.com/shop/6162303'

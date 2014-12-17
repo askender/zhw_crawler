@@ -8,3 +8,10 @@ html*
 old
 *.csv
 *.xls
+
+jobs
+local*
+proxy_list_*
+pyspider
+tools/ktb_convert_coords.py
+sites
